@@ -19,7 +19,6 @@ class MenuTab extends Component {
         })
     }
 
-
     openModal(item) {
         let data = [...this.state.dataSource];
         const items = data.map(el => {
@@ -28,12 +27,8 @@ class MenuTab extends Component {
             } else {
                 el.isVisible = false;
             }
-
             return el;
         });
-        // let index = items.findIndex(el => el.name == item.name);
-        // items[index] = { ...items[index], key: item.name };
-
         this.setState({
             dataSource: items
         })
@@ -48,13 +43,13 @@ class MenuTab extends Component {
             <View>
                 <FlatList
                     data={dataSource}
-                    keyExtractor={(item, index) => item.name}
+                    keyExtractor={(item) => item.name}
                     renderItem={({ item }) => {
                         return (
                             <View>
-                                <TouchableOpacity style={styles.menu2} onPress={() => this.openModal(item)}>
-                                    <Text style={styles.menu2Text}>{item.name}</Text>
-                                    <Image style={{ width: 100, height: 100, alignSelf: 'center', marginTop: 10 }} />
+                                <TouchableOpacity style={styles.menu} onPress={() => this.openModal(item)}>
+                                    <Text style={styles.menuText}>{item.name}</Text>
+                                    {/* <Image style={{ width: 100, height: 100, alignSelf: 'center', marginTop: 10 }} source={require(item.image)} /> */}
                                 </TouchableOpacity>
                                 {!item.isVisible ? null : <Menus items={item.items} />}
                             </View>)
@@ -69,21 +64,6 @@ class MenuTab extends Component {
 
 const styles = StyleSheet.create({
     menu: {
-        width: '90%',
-        height: '10%',
-        borderWidth: 0.5,
-        borderColor: 'white',
-        marginTop: '2%',
-        marginBottom: '1%',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        backgroundColor: 'blue'
-    },
-    menuText: {
-        fontSize: 15,
-        marginLeft: '4%'
-    },
-    menu2: {
         height: 200,
         width: '80%',
         borderWidth: 10,
@@ -92,19 +72,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius:10
+        borderRadius: 10
     },
-    menu2Text: {
+    menuText: {
         fontSize: 20,
-    },
-    checkboxContainer: {
-        padding: 0,
-        width: 24,
-        height: 24,
-        borderRadius: 12,
-        marginRight: 0,
-        borderColor: '#aaa',
-        borderWidth: 1,
     },
 });
 

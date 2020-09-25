@@ -20,7 +20,6 @@ class SubMenuTab extends Component {
                 items: Menu.menus.find(el => el.key == item)
             }
         });
-
         this.setState({
             dataSource: subMenus
         })
@@ -37,10 +36,6 @@ class SubMenuTab extends Component {
 
             return el;
         });
-
-        // let index = items.findIndex(el => el.name == item.name);
-        // items[index] = { ...items[index], key: item.name };
-
         this.setState({
             dataSource: items
         })
@@ -53,17 +48,17 @@ class SubMenuTab extends Component {
             <View>
                 <FlatList
                     data={dataSource}
-                    keyExtractor={(item, index) => item.title}
-                    renderItem={({ item }) => 
+                    keyExtractor={(item) => item.title}
+                    renderItem={({ item }) =>
 
                         <View>
-                            <TouchableOpacity style={styles.menu2} onPress={() => this.openModal(item)}>
-                                        <Text style={styles.menu2Text}>{item.title}</Text>
-                                        {/* <Image source={require('./' + icon + '.jpg')} /> */}
+                            <TouchableOpacity style={styles.menu} onPress={() => this.openModal(item)}>
+                                <Text style={styles.menuText}>{item.title}</Text>
+                                {/* <Image source={require('./' + icon + '.jpg')} /> */}
                             </TouchableOpacity>
                             {!item.isVisible ? null : <SubMenus items={item.items.items} />}
                         </View>
-                    
+
                     }
                 />
 
@@ -75,44 +70,20 @@ class SubMenuTab extends Component {
 
 const styles = StyleSheet.create({
     menu: {
-        width: '90%',
-        height: '10%',
-        borderWidth: 0.5,
-        borderColor: 'white',
-        marginTop: '2%',
-        marginBottom: '1%',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        backgroundColor: 'blue'
-    },
-    menuText: {
-        fontSize: 15,
-        marginLeft: '4%'
-    },
-    menu2: {
         height: 200,
         width: '80%',
         borderWidth: 5,
         borderColor: 'black',
         marginTop: '2%',
         alignSelf: 'center',
-        justifyContent:'center',
-        alignItems:'center',
-        borderRadius:10
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10
     },
-    menu2Text: {
+    menuText: {
         marginLeft: '4%',
         fontSize: 16,
         alignSelf: 'center',
-    },
-    checkboxContainer: {
-        padding: 0,
-        width: 24,
-        height: 24,
-        borderRadius: 12,
-        marginRight: 0,
-        borderColor: '#aaa',
-        borderWidth: 1,
     },
 });
 

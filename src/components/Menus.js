@@ -9,7 +9,7 @@ class Menus extends Component {
         super(props);
         this.state = {
             dataSource: [],
-            checked:false
+            checked: false
         }
     }
 
@@ -20,12 +20,11 @@ class Menus extends Component {
     }
 
     setToggleCheckBox(item) {
-        const {checked} =this.state;
         let data = [...this.state.dataSource];
-        const items=data.map(el => {
+        const items = data.map(el => {
             if (el.name == item.name) {
                 el.isChecked = !el.isChecked;
-                this.setState({checked : false})
+                this.setState({ checked: false })
             } else {
                 el.isChecked = el.isChecked;
             }
@@ -43,10 +42,6 @@ class Menus extends Component {
             }
             return el;
         });
-
-        // let index = items.findIndex(el => el.name == item.name);
-        // items[index] = { ...items[index], key: item.name };
-
         this.setState({
             dataSource: items
         })
@@ -54,27 +49,28 @@ class Menus extends Component {
 
 
     render() {
-        const { dataSource , checked} = this.state;
+        const { dataSource } = this.state;
         return (
             <View>
                 <FlatList
                     data={dataSource}
-                    keyExtractor={(item, index) => item.name}
+                    keyExtractor={(item) => item.name}
                     renderItem={({ item }) => {
                         const view = item.subMenus ?
                             <View>
                                 <TouchableOpacity style={styles.menu2} onPress={() => this.openModal(item)}>
-                                    <Text style={styles.menu2Text}>{item.name}</Text>
-                                    <Text style={styles.menu2Text}>{item.price+' ₺'}</Text>
-                                    {/* <Image source={require('./' + icon + '.jpg')} /> */}
+                                    <Text style={styles.menuText}>{item.name}</Text>
+                                    <Text style={styles.menuText}>{item.price + ' ₺'}</Text>
+                                    {/* <Image source={require(item.image)} /> */}
 
                                 </TouchableOpacity>
                                 {!item.isVisible ? null : <SubMenuTab items={item.subMenus} />}
                             </View>
                             :
                             <View style={styles.menu}>
-                                <Text style={styles.menu2Text}>{item.name}</Text>
-                                <Text style={styles.menu2Text}>{item.price+ ' ₺'}</Text>
+                                <Text style={styles.menuText}>{item.name}</Text>
+                                <Text style={styles.menuText}>{item.price + ' ₺'}</Text>
+                                {/* <Image source={require(item.image)} /> */}
                                 <CheckBox
                                     onValueChange={() => this.setToggleCheckBox(item)}
                                     disabled={false}
@@ -94,25 +90,10 @@ class Menus extends Component {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    checkboxContainer: {
-        flexDirection: "row",
-        marginBottom: 20,
-    },
-    checkbox: {
-        alignSelf: "center",
-    },
-    label: {
-        margin: 8,
-    },
     menu: {
         width: '80%',
         height: 200,
-        borderWidth: 2,
+        borderWidth: 3,
         borderColor: 'blue',
         marginTop: '2%',
         justifyContent: 'center',
@@ -121,8 +102,9 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     menuText: {
-        fontSize: 15,
-        marginLeft: '4%'
+        marginLeft: '4%',
+        fontSize: 16,
+        alignSelf: 'center',
     },
     menu2: {
         height: 200,
@@ -134,20 +116,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10
-    },
-    menu2Text: {
-        marginLeft: '4%',
-        fontSize: 16,
-        alignSelf: 'center',
-    },
-    checkboxContainer: {
-        padding: 0,
-        width: 24,
-        height: 24,
-        borderRadius: 12,
-        marginRight: 0,
-        borderColor: '#aaa',
-        borderWidth: 1,
     },
 });
 

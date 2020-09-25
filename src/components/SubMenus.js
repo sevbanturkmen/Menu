@@ -42,21 +42,19 @@ class SubMenus extends Component {
             <View>
                 <FlatList
                     data={dataSource}
-                    keyExtractor={(item, index) => item.name}
+                    keyExtractor={(item) => item.name}
                     renderItem={({ item }) =>
-                        <View style={styles.menu2}>
+                        <View style={styles.menu}>
 
-                            <Text style={styles.menu2Text}>{item.name}</Text>
-                            <Text style={styles.menu2Text}>{item.price ? item.price+' ₺' : null}</Text>
-                            {/* <Image source={require('./' + icon + '.jpg')} /> */}
+                            <Text style={styles.menuText}>{item.name}</Text>
+                            <Text style={styles.menuText}>{item.price ? item.price + ' ₺' : null}</Text>
+                            {/* <Image source={require(item.image} /> */}
                             <CheckBox
                                 onValueChange={() => this.setToggleCheckBox(item)}
                                 disabled={false}
                                 value={item.isChecked}
                             />
-
                         </View>
-
                     }
                 />
 
@@ -67,7 +65,7 @@ class SubMenus extends Component {
 
 
 const styles = StyleSheet.create({
-    menu2: {
+    menu: {
         height: 200,
         width: '80%',
         borderWidth: 3,
@@ -78,7 +76,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10
     },
-    menu2Text: {
+    menuText: {
         marginLeft: '4%',
         fontSize: 16,
         alignSelf: 'center',
